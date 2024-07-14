@@ -1,0 +1,10 @@
+.main{
+    color: rgb(0, 68, 128);
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.main h1{
+    font-size: 60px;
+}

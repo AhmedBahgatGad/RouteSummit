@@ -1,0 +1,90 @@
+<app-main></app-main>
+<div class="container m-auto py-5">
+  <!-- carousel for customers -->
+   <h2>Choose Customer :</h2>
+  <section id="carousel">
+    <owl-carousel-o [options]="customOptions">
+      <ng-container
+        *ngFor="let customer of customers"
+        class="text-center m-auto"
+      >
+        <ng-template carouselSlide>
+          <div class="text-center m-auto">
+            <div
+              class="card mx-2 px-0 cursor-pointer"
+              (click)="loadData({ id: customer.id })"
+            >
+              <div class="card-header text-dark bg-gradient text-center">
+                Customer ID : {{ customer.id }}
+              </div>
+              <div class="card-body bg-dark text-white">
+                <h5 class="card-title">{{ customer.name }}</h5>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </ng-container>
+    </owl-carousel-o>
+  </section>
+  <!-- search by name -->
+  <div class="my-3">
+    <label for="customerName" class="my-2 text-primary"
+      >Search By Full Name :</label
+    >
+    <input
+      id="customerName"
+      type="text"
+      (input)="onTypingName($event)"
+      class="form-control"
+      placeholder="Search by Name..."
+    />
+  </div>
+  <div class="text-center m-auto my-4" *ngIf="filteredCustomers">
+    <button
+      class="btn btn-dark m-3"
+      *ngFor="let customer of filteredCustomers"
+      (click)="loadData({ id: customer.id })"
+    >
+      {{ customer.name }}
+    </button>
+  </div>
+  <!-- search by amount -->
+  <label for="amount" class="my-2 text-primary"
+    >Search By Amount For All Customers :</label
+  >
+  <input
+    id="amount"
+    type="number"
+    (input)="onTypingAmount($event)"
+    class="form-control"
+    placeholder="Search by amount..."
+  />
+  <!-- transactions table -->
+  <table
+    *ngIf="dataLoaded"
+    class="table text-center table-striped table-dark my-3"
+  >
+    <thead>
+      <tr>
+        <th>Transaction Id</th>
+        <th>Customer Id</th>
+        <th>Date</th>
+        <th>Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let transaction of transactions">
+        <td>{{ transaction.id }}</td>
+        <td>{{ transaction.customer_id }}</td>
+        <td>{{ transaction.date }}</td>
+        <td>{{ transaction.amount }}</td>
+      </tr>
+      <tr>
+        <td colspan="3">Total Amount</td>
+        <td>{{ total }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <app-new-trans-btn *ngIf="dataLoaded"></app-new-trans-btn>
+  <app-chart></app-chart>
+</div>

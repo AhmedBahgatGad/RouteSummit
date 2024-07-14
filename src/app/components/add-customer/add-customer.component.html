@@ -1,0 +1,14 @@
+<section class="bg-main-light p-4 rounded my-3 w-75 mx-auto">
+  <h1>Add New Customer</h1>
+  <form [formGroup]="customerGroup" (ngSubmit)="handleForm()">
+    <div class="mb-2">
+      <label for="id">Customer Id :</label>
+      <input #idInput formControlName="id" type="number" id="id" class="form-control" />
+    </div>
+    <div class="mb-2">
+      <label for="name">Customer Name :</label>
+      <input #name formControlName="name" type="text" id="name" class="form-control" />
+    </div>
+    <button class="btn-main ms-auto d-block">Add Customer</button>
+  </form>
+</section>

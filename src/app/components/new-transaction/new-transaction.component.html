@@ -1,0 +1,53 @@
+<section class="bg-main-light p-4 rounded my-3 w-75 mx-auto">
+  <h1>Add New Transaction</h1>
+  <form [formGroup]="transGroup" (ngSubmit)="handleForm()">
+    <div class="mb-2">
+      <label for="id">Transaction Id :</label>
+      <input
+      #idInput
+      formControlName="id"
+      type="number" id="id" class="form-control" />
+    </div>
+    <div
+        class="alert alert-danger"
+        *ngIf="
+          transGroup.get('id')?.errors &&
+          (transGroup.get('id')?.touched ||
+            idInput.value.length > 0)
+        "
+      >
+        <p *ngIf="transGroup.get('id')?.getError('required')">
+          id is Required
+        </p>
+        <p *ngIf="transGroup.get('id')?.getError('mismatch')">
+          id Already Exists
+        </p>
+      </div>
+    <div class="mb-2">
+      <label for="customer_id">Customer Id :</label>
+      <input
+      #customer_idInput
+      formControlName="customer_id"
+       type="number" id="customer_id" class="form-control" />
+    </div>
+    <div class="mb-2">
+        <label for="date">Date :</label>
+        <input
+          [(ngModel)]="defaultDate"
+          #dateInput
+          formControlName="date"
+          type="date"
+          id="date"
+          class="form-control"
+        />
+      </div>
+    <div class="mb-2">
+      <label for="amout">Amout :</label>
+      <input
+      #amountInput
+      formControlName="amount"
+      type="number" id="amount" class="form-control" />
+    </div>
+    <button class="btn-main ms-auto d-block">Add Transaction</button>
+  </form>
+</section>
